@@ -13,4 +13,4 @@ docker-build:
 
   # sudo docker login -u electrolernapp -p electrolernapp docker.io
   # sudo docker pull --name weblab_frontend -p 80:80 electrolernapp/weblab:frontend
-  # sudo docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -i 10 weblab_backend weblab_frontend
+  # sudo docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --include-stopped -i 10 weblab_backend weblab_frontend
