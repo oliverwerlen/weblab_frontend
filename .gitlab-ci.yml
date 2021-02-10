@@ -1,0 +1,16 @@
+stages:
+  - docker-build
+
+docker-build:
+  stage: docker-build
+  image: docker:stable
+  services:
+    - name: docker:19.03.8-dind
+  script:
+    - docker build -t electrolernapp/weblab:backend .
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker push electrolernapp/weblab:backend
+
+  # sudo docker login -u electrolernapp -p electrolernapp docker.io
+  # sudo docker pull --name weblab_backend -p 8080:3000 electrolernapp/weblab:backend
+  # sudo docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -i 10 weblab_backend
