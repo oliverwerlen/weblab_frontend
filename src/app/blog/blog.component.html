@@ -1,1 +1,8 @@
-<p>blog works!</p>
+<h2>All Blogs</h2>
+
+<mat-card *ngFor="let blog of blogs" class = "blog-cards">
+    <mat-card-header>
+        <mat-card-title>{{blog.name}}</mat-card-title>
+        <mat-card-subtitle>{{blog.description}}</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>

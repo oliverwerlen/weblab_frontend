@@ -6,19 +6,37 @@ import { BlogComponent } from './blog/blog.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { BlogentriesComponent } from './blogentries/blogentries.component';
+import { UserComponent } from './user/user.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button'
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BlogComponent,
-    DashboardComponent
+    DashboardComponent,
+    BlogentriesComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, 
-    AppRoutingModule
+    AppRoutingModule, 
+    MatCardModule, 
+    MatSidenavModule, 
+    MatListModule,
+    MatIconModule, 
+    MatToolbarModule, 
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

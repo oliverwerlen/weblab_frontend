@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BLOGS } from '../mock-blogs';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-blog',
@@ -8,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class BlogComponent implements OnInit {
 
   constructor() { }
+
+  blogs = BLOGS;
 
   ngOnInit(): void {
   }
