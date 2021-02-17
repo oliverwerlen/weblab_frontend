@@ -2,7 +2,7 @@ import { User } from '../user/user';
 import { Blogentry } from '../blogentries/blogentry';
 
 export interface Blog {
-    id: number;
+    id: string;
     name: string;
     createDate: Date;
     creator: User;

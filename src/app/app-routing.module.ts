@@ -5,10 +5,13 @@ import { BlogComponent } from './blog/blog.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BlogentriesComponent } from './blogentries/blogentries.component';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent }, 
-  { path: 'blog', component: BlogComponent }
+  { path: 'blog', component: BlogComponent }, 
+  { path: 'blog/:id', component: BlogentriesComponent }
 ];
 
 @NgModule({

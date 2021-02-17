@@ -11,9 +11,9 @@ export const BLOGENTRIES: Blogentry[] = [
     { id: 1, title: 'Test1', destination: 'Griechenland', description: 'Wunderbares Land, es ist super hier', createDate: new Date(), user: USERS[0], updateDate: new Date() }
 ]
 export const BLOGS: Blog[] = [
-    { id: 1, name: 'First Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }, 
-    { id: 2, name: 'Second Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }, 
-    { id: 3, name: 'Third Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }, 
-    { id: 4, name: 'Fourth Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }
+    { id: "1", name: 'First Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }, 
+    { id: "2", name: 'Second Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }, 
+    { id: "3", name: 'Third Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }, 
+    { id: "4", name: 'Fourth Blog', createDate: new Date(), creator: USERS[0], description: 'This is a demo', blogentries: BLOGENTRIES }
 
 ]

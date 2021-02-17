@@ -13,7 +13,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MatButtonModule } from '@angular/material/button'
     MatListModule,
     MatIconModule, 
     MatToolbarModule, 
-    MatButtonModule
+    MatButtonModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

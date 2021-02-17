@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BLOGS } from '../mock-blogs';
 import {MatCardModule} from '@angular/material/card';
+import { Blog } from './blog';
+import { BlogService} from '../blog.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-blog',
@@ -9,11 +11,15 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class BlogComponent implements OnInit {
 
-  constructor() { }
+  blogs: Blog[];
+  constructor(private blogService: BlogService) { }
 
-  blogs = BLOGS;
-
+  getBlogs(): void{
+    this.blogService.getBlogs()
+    .subscribe(blogs => this.blogs = blogs);
+  }
   ngOnInit(): void {
+    this.getBlogs();
   }
 
 }
