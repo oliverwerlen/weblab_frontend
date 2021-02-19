@@ -7,6 +7,9 @@ import { Location } from '@angular/common';
 import { BLOGENTRIES } from '../mock-blogs';
 import { BlogentriesService } from '../blogentries.service';
 import { BlogService } from '../blog.service';
+import { CommentService } from '../comment.service';
+import { NgForm } from '@angular/forms';
+import { Comment } from './comment';
 
 @Component({
   selector: 'app-blogentries',
@@ -16,21 +19,33 @@ import { BlogService } from '../blog.service';
 export class BlogentriesComponent implements OnInit {
 
   blog: Blog;
-  blogentries: Blogentry[];
+  comments: Comment[];
+  commentText: string;
   
   constructor(  private route: ActivatedRoute,
-    private location: Location, private blogentriesService: BlogentriesService, private blogService: BlogService
+    private location: Location, private blogentriesService: BlogentriesService, private blogService: BlogService, private commentService: CommentService
     ) { }
-
-  ngOnInit(): void {
-    this.getBlogentries();
-  }
-
+  
   getBlogentries(): void {
-    const id = +this.route.snapshot.paramMap.get('_id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.blogService.getBlog(id)
       .subscribe(blog => this.blog = blog);
-      this.blogentries = this.blog.blogentries;
+  }
+  ngOnInit(): void {
+    console.log("init"); 
+    this.getBlogentries();
+  }
+  loadComments(blogentryId: string): void{
+    console.log("load comments" + blogentryId);
+    this.commentService.getCommentsByBlogentry(blogentryId)
+    .subscribe(comments => this.comments = comments);
+  }
+
+  postComment(blogentryId: string): void{
+    console.log("posted" + this.commentText);
+    this.commentService.addComment({"text": this.commentText, "blogentry": blogentryId}).subscribe(comment => {
+      this.comments.push(comment);
+    });;
   }
 
   goBack(): void {

@@ -15,6 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormField } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -35,7 +40,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule, 
     MatToolbarModule, 
     MatButtonModule, 
-    HttpClientModule
+    HttpClientModule, 
+    MatExpansionModule, 
+    MatInputModule, 
+    ReactiveFormsModule, 
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

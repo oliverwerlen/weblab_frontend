@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Comment } from './blogentries/comment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BlogentriesService {
+export class CommentService {
 
   private commentUrl = 'http://localhost:3000/api/comment';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  postId: number;
 
   constructor(private http: HttpClient) { }
 
@@ -18,6 +23,21 @@ export class BlogentriesService {
     return this.http.get<Comment[]>(this.commentUrl)
     .pipe(
       catchError(this.handleError<Comment[]>('getComment', []))
+    );
+  }
+  
+  getComment(id: string):Observable<Comment[]>{
+    const url = `${this.commentUrl}/${id}`;
+    console.log(url);
+    return this.http.get<Comment[]>(this.commentUrl)
+    .pipe(
+      catchError(this.handleError<Comment[]>('getComment', []))
+    );
+  }
+  addComment(comment: Comment):Observable<Comment>{
+    return this.http.post<Comment>(this.commentUrl, JSON.stringify(comment), this.httpOptions).pipe(
+      tap((newComment: Comment) => console.log(`added comment w/ `)),
+      catchError(this.handleError<Comment>('addComment'))
     );
   }
 
@@ -41,4 +61,5 @@ private handleError<T>(operation = 'operation', result?: T) {
   };
 }
 
+  
 }

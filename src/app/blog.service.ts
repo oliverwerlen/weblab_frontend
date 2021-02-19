@@ -19,14 +19,12 @@ export class BlogService {
     );
   }
 
-  getBlog(id: any):Observable<Blog>{
+  getBlog(id: string):Observable<Blog>{
     const url = `${this.blogsUrl}/${id}`;
     return this.http.get<Blog>(url).pipe(
-      tap(_ => console.log(`fetched blog id=${id}`)),
+      tap(_ => console.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Blog>(`getBlog id=${id}`))
     );
-  
-
   }
   constructor(
     private http: HttpClient
