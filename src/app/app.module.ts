@@ -19,6 +19,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormField } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatRippleModule} from '@angular/material/core';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 
 
@@ -28,7 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BlogComponent,
     DashboardComponent,
     BlogentriesComponent,
-    UserComponent
+    UserComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatExpansionModule, 
     MatInputModule, 
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule, 
+    MatRippleModule, 
+    MatGridListModule, 
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

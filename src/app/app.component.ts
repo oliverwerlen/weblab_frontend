@@ -23,4 +23,5 @@ export class AppComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
   }
+  
 }

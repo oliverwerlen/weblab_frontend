@@ -19,15 +19,14 @@
                     <mat-label>Comment</mat-label>
                     <input matInput [(ngModel)]="commentText" name = "commentText">
                 </mat-form-field>
-                <button type = "submit" mat-button>Post</button>
+                <button type = "submit" mat-raised-button color="primary">Post</button>
             </form>
             <p *ngFor="let comment of blogentry.comment" class="comments">
+                <span (click)="deleteComment(comment._id)" class="material-icons">delete</span>
                 {{comment.text}}
             </p>
           </mat-expansion-panel>
 
         
     </mat-card>
-<button (click)="goBack()">go back</button>
-
-
+    <button mat-raised-button color="primary"(click)="goBack()">Back</button>

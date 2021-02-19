@@ -25,7 +25,7 @@ export class CommentService {
       catchError(this.handleError<Comment[]>('getComment', []))
     );
   }
-  
+
   getComment(id: string):Observable<Comment[]>{
     const url = `${this.commentUrl}/${id}`;
     console.log(url);
@@ -41,6 +41,13 @@ export class CommentService {
     );
   }
 
+  deleteComment(commentId: string): Observable<Comment> {
+    const url = `${this.commentUrl}/${commentId}`;
+    return this.http.delete<Comment>(url, this.httpOptions).pipe(
+      tap(_ => console.log(`deleted comment id=${commentId}`)),
+      catchError(this.handleError<Comment>('deletedComment'))
+    );
+  }
     /**
  * Handle Http operation that failed.
  * Let the app continue.
