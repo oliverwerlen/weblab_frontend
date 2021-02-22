@@ -23,6 +23,13 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { RegisterComponent } from './register/register.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
+import { LoginComponent } from './login-component/login.component';;
+
+
+
 
 
 
@@ -33,7 +40,9 @@ import { MyAccountComponent } from './my-account/my-account.component';
     DashboardComponent,
     BlogentriesComponent,
     UserComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,9 @@ import { MyAccountComponent } from './my-account/my-account.component';
     FormsModule, 
     MatRippleModule, 
     MatGridListModule, 
-    MatMenuModule
+    MatMenuModule, 
+    MatFormFieldModule, 
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

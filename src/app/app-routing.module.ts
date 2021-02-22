@@ -7,13 +7,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BlogentriesComponent } from './blogentries/blogentries.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login-component/login.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent }, 
   { path: 'blog', component: BlogComponent }, 
   { path: 'blog/:id', component: BlogentriesComponent },
-  { path: 'myAccount', component: MyAccountComponent }
+  { path: 'myAccount', component: MyAccountComponent }, 
+  { path: 'register', component: RegisterComponent}, 
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

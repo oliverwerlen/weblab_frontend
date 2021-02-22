@@ -12,15 +12,6 @@ export class BlogentriesService {
 
   constructor(private http: HttpClient) { }
 
-  getCommentsByBlogentry(id: string):Observable<Comment[]>{
-    const url = `${this.commentUrl}/${id}`;
-    console.log(url);
-    return this.http.get<Comment[]>(this.commentUrl)
-    .pipe(
-      catchError(this.handleError<Comment[]>('getComment', []))
-    );
-  }
-
     /**
  * Handle Http operation that failed.
  * Let the app continue.
