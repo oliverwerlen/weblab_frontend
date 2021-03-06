@@ -1,10 +1,12 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
+  <mat-toolbar color="white" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name" routerLink="/dashboard">Travel Blog </h1>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>account_box</mat-icon>
-    </button>
+    <div class="account-icon">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>account_box</mat-icon>
+      </button>
+    </div>
     <mat-menu  #menu="matMenu">
       <button *ngIf="isLoggedIn" mat-menu-item>
         <mat-icon > account_box</mat-icon>
@@ -23,7 +25,7 @@
         <a routerLink="/register">Register</a>
       </button>
     </mat-menu>
-  </mat-toolbar> 
+  </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container"
                          [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
