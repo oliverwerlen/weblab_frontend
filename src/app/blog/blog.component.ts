@@ -16,7 +16,7 @@ export class BlogComponent implements OnInit {
 
   blogs: Blog[];
   isLoggedIn = false;
-  updateForm = false;
+  updateForm = "";
   roles: string[] = [];
   formGroup: FormGroup;
   constructor(private blogService: BlogService, private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private formBuilder: FormBuilder ) { }
@@ -57,12 +57,13 @@ export class BlogComponent implements OnInit {
     console.log("show edit form")
     if(this.updateForm){
       console.log("false")
-      this.updateForm=false;
+      this.updateForm= "";
     }else{
       this.createForm();
       this.formGroup.controls['title'].setValue(blog.title)
       this.formGroup.controls['description'].setValue(blog.description)
-      this.updateForm = true;
+      this.updateForm = blog._id;
+      this.updateForm = blog._id;
     }
   }
   ngOnInit(): void {
