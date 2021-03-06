@@ -51,6 +51,13 @@ export class BlogService {
     );
   }
 
+  addBlog(blog: Blog):Observable<any>{
+    return this.http.post(this.blogsUrl, blog, this.httpOptions).pipe(
+      tap(_ => console.log(`added blog`)),
+      catchError(this.handleError<Blog>(`added blog`))
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.
