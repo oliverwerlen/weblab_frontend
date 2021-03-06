@@ -4,7 +4,7 @@ import { User } from './user/user';
 import { Comment } from './blogentries/comment';
 
 export const USERS: User[] = [
-    { id: "1", username: 'test1', password: 'test1', email: 'test1@gmail.com', createdate: new Date(), role: 'ROLE_USER' }
+    { id: "1", username: 'test1', password: 'test1', email: 'test1@gmail.com', createdate: new Date(), role: 'ROLE_USER'}
 
 ]
 export const BLOGENTRIES: Blogentry[] = [

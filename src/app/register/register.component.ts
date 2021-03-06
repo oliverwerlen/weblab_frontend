@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';;
 import { Observable } from 'rxjs';
 import { User } from '../user/user';
+import { TokenStorageService } from '../token-storage.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,9 +21,11 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   formGroup: FormGroup;
   titleAlert: string = 'This field is required';
+  roles: string[] = [];
   post: any = '';
+  hide = true;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, public dialog: MatDialog) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, public dialog: MatDialog,private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -76,12 +81,30 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.tokenStorage.saveToken(data.token);
+        this.openSnackBar();
       },
       err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
     );
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+  routeToMyAccount(): void{
+    this.router.navigate(["/myAccount"]);
+  }
+
+  openSnackBar() {
+    this._snackBar.open("User created successfully", "Close", {
+      duration: 2000,
+    });
+    this.reloadPage();
+    this.routeToMyAccount();
   }
 
 }

@@ -22,16 +22,12 @@ httpOptions = {
     let credentials = JSON.stringify({ "username": formData["name"], "password": formData["password"]});
     
     console.log(credentials)
-    return this.http.post(authUrl + '/login', {
-      credentials
-    }, this.httpOptions);
+    return this.http.post(authUrl + '/login', credentials, this.httpOptions);
   }
 
   register(formData): Observable<any> {
     let user = JSON.stringify({ "username": formData["name"], "password": formData["password"], "email": formData["email"],  "role": 'user' });
     console.log(user);
-    return this.http.post(authUrl + '/register', {
-      user
-    }, this.httpOptions);
+    return this.http.post(authUrl + '/register', user, this.httpOptions);
   }
 }

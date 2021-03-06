@@ -4,6 +4,8 @@ import { TokenStorageService } from '../token-storage.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';;
 import { Observable } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,13 +25,16 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   formGroup: FormGroup;
   post: any = '';
+  hide=true;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
+      this.roles = this.tokenStorage.getUserRole();
+      console.log(this.roles);
+      this.routeToMyAccount();
     }
     this.createForm();
   }
@@ -45,18 +50,14 @@ export class LoginComponent implements OnInit {
     return this.formGroup.get('name') as FormControl
   }
 
-  onSubmit(post): void {
-    
-
+  submit(post): void {
     this.authService.login(post).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-
+        this.tokenStorage.saveToken(data.token);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        console.log(this.roles);
+        this.openSnackBar();
       },
       err => {
         this.errorMessage = err.error.message;
@@ -66,6 +67,18 @@ export class LoginComponent implements OnInit {
   }
   reloadPage(): void {
     window.location.reload();
+  }
+  routeToMyAccount(): void{
+    this.router.navigate(["/myAccount"]);
+  }
+
+
+  openSnackBar() {
+    this._snackBar.open("User Logged in", "Close", {
+      duration: 2000
+    });
+    this.reloadPage();
+    this.routeToMyAccount();
   }
 
 }

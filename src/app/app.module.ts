@@ -26,7 +26,8 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { RegisterComponent } from './register/register.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
-import { LoginComponent } from './login-component/login.component';;
+import { LoginComponent } from './login-component/login.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -63,7 +64,8 @@ import { LoginComponent } from './login-component/login.component';;
     MatGridListModule, 
     MatMenuModule, 
     MatFormFieldModule, 
-    MatDialogModule
+    MatDialogModule, 
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

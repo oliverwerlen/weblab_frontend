@@ -1,1 +1,6 @@
-<p>my-account works!</p>
+<div *ngIf="isLoggedIn">
+
+</div>
+<div *ngIf="!isLoggedIn?goToLogin():false;">
+    
+</div>

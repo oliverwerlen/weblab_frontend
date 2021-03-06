@@ -5,17 +5,25 @@
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>account_box</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+    <mat-menu  #menu="matMenu">
+      <button *ngIf="isLoggedIn" mat-menu-item>
         <mat-icon > account_box</mat-icon>
         <a routerLink="/myAccount">My Account</a>
       </button>
-      <button mat-menu-item>
-        <mat-icon > logout</mat-icon>
-        <a routerLink="/logout">Logout</a>
+      <button *ngIf="isLoggedIn" mat-menu-item>
+        <mat-icon (click)="logout()">logout</mat-icon>
+        <a (click)="logout()">Logout </a>
+      </button>
+      <button *ngIf="!isLoggedIn" mat-menu-item>
+        <mat-icon >login</mat-icon>
+        <a routerLink="/login">Login</a>
+      </button>
+      <button *ngIf="!isLoggedIn" mat-menu-item>
+        <mat-icon > app_registration</mat-icon>
+        <a routerLink="/register">Register</a>
       </button>
     </mat-menu>
-  </mat-toolbar>
+  </mat-toolbar> 
 
   <mat-sidenav-container class="example-sidenav-container"
                          [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
