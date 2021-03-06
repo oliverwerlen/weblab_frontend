@@ -10,6 +10,7 @@ import { Blogentry } from './blogentries/blogentry';
 export class BlogentriesService {
 
   private commentUrl = 'http://localhost:3000/api/comment';
+  private blogentryUrl = 'http://localhost:3000/api/blogentry'
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,32 @@ export class BlogentriesService {
     return this.http.get<Blogentry[]>(url)
     .pipe(
       catchError(this.handleError<Blogentry[]>('getBlogentries', []))
+    );
+  }
+
+  addBlogentry(blogentry: Blogentry):Observable<any>{
+    console.log(blogentry)
+    return this.http.post(this.blogentryUrl, blogentry, this.httpOptions).pipe(
+      tap(_ => console.log(`added blogentry`)),
+      catchError(this.handleError<Blogentry>(`added blogentry`))
+    );
+  }
+
+  deleteBlogentry(id: string):Observable<Blogentry>{
+    const url = `${this.blogentryUrl}/${id}`;
+    console.log(url)
+    return this.http.delete<Blogentry>(url).pipe(
+      tap(_ => console.log(`deleted blogentry id=${id}`)),
+      catchError(this.handleError<Blogentry>(`delete Blogentry id=${id}`))
+    );
+  }
+
+  updateBlogentry(blogentry: Blogentry, blogentryId: string):Observable<any>{
+    const url = `${this.blogentryUrl}/${blogentryId}`;
+    console.log(url)
+    return this.http.patch(url, blogentry, this.httpOptions).pipe(
+      tap(_ => console.log(`updated blog`)),
+      catchError(this.handleError<Blogentry>(`updated blog`))
     );
   }
     /**
