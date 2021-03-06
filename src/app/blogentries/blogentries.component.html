@@ -1,34 +1,35 @@
-<mat-card *ngFor="let blogentry of blogentries" class = "blogentry-cards">
-        <mat-card-header>
-            <mat-card-title>{{blogentry.title}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            {{blogentry.description}}
-            {{blogentry.createDate}}
-        </mat-card-content>
-          <mat-expansion-panel (opened) = "loadComments(blogentry._id)" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                  Comments
-              </mat-panel-title>
-              <mat-panel-description>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p *ngFor="let comment of blogentry.comments" class="comments">
-              <script>console.log(comment)</script>
-              <span (click)="deleteComment(comment._id)" class="material-icons">delete</span>
-              {{comment.text}}
-            </p>
-            <form (submit)="postComment(blogentry._id)" name = "commentForm">
-                <mat-form-field>
-                    <mat-label>Comment</mat-label>
-                    <input matInput [(ngModel)]="commentText" name = "commentText">
-                </mat-form-field>
-                <button type = "submit" mat-raised-button color="primary">Post</button>
-            </form>
+<div class="blogentry-container">
+  <mat-card *ngFor="let blogentry of blogentries" class = "blogentry-cards">
+    <mat-card-header>
+      <mat-card-title>{{blogentry.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      {{blogentry.description}}
+      {{blogentry.createDate}}
+    </mat-card-content>
+    <mat-expansion-panel (opened) = "loadComments(blogentry._id)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Comments
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p *ngFor="let comment of blogentry.comments" class="comments">
+        {{comment.text}}
+        <span *ngIf="blogentry.creator._id == this.userId" (click)="deleteComment(comment._id)" class="material-icons">delete</span>
+      </p>
+      <form (submit)="postComment(blogentry._id)" name = "commentForm">
+        <mat-form-field>
+          <mat-label>Comment</mat-label>
+          <input matInput [(ngModel)]="commentText" name = "commentText">
+        </mat-form-field>
+        <button type = "submit" mat-raised-button color="primary">Post</button>
+      </form>
 
-          </mat-expansion-panel>
+    </mat-expansion-panel>
 
 
-    </mat-card>
-    <button mat-raised-button color="primary"(click)="goBack()">Back</button>
+  </mat-card>
+  <button mat-raised-button color="primary"(click)="goBack()">Back</button>
+</div>

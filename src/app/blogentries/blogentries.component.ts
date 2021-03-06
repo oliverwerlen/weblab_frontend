@@ -9,6 +9,7 @@ import { CommentService } from '../comment.service';
 import { NgForm } from '@angular/forms';
 import { Comment } from './comment';
 import { Blogentry } from './blogentry'
+import {TokenStorageService} from "../token-storage.service";
 
 @Component({
   selector: 'app-blogentries',
@@ -21,24 +22,30 @@ export class BlogentriesComponent implements OnInit {
   comments: Comment[];
   commentText: string;
   loaded = false;
+  isLoggedIn = false;
+  userId = '';
 
-  constructor(  private route: ActivatedRoute,
-    private location: Location, private blogentriesService: BlogentriesService, private blogService: BlogService, private commentService: CommentService
+  constructor( private route: ActivatedRoute, private location: Location, private blogentriesService: BlogentriesService, private tokenStorage: TokenStorageService, private blogService: BlogService, private commentService: CommentService
     ) { }
 
   getBlogentries(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogentriesService.getBlogsentries(id)
       .subscribe(
-        blogentries => this.blogentries = this.blogentries
+        blogentries => this.blogentries = blogentries
         );
   }
   ngOnInit(): void {
     console.log("init");
     this.getBlogentries();
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.userId = this.tokenStorage.getUserId();
+    }
   }
 
   loadComments(blogentryId: string): void{
+    console.log(this.blogentries);
     console.log("load comments" + blogentryId);
     this.commentService.getCommentsByBlogentry(blogentryId)
     .subscribe(comments => this.comments = comments);

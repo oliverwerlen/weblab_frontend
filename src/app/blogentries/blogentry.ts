@@ -8,7 +8,7 @@ export interface Blogentry {
     destination: string;
     description: string;
     createDate: Date;
-    user: User;
+    creator: User;
     updateDate: Date;
     comments: Comment[];
 }
