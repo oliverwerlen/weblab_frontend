@@ -9,6 +9,7 @@ import { CommentService } from '../comment.service';
 import { NgForm } from '@angular/forms';
 import { Comment } from './comment';
 import { Blogentry } from './blogentry'
+import {TokenStorageService} from "../token-storage.service";
 
 @Component({
   selector: 'app-blogentries',
@@ -21,24 +22,31 @@ export class BlogentriesComponent implements OnInit {
   comments: Comment[];
   commentText: string;
   loaded = false;
-  
-  constructor(  private route: ActivatedRoute,
-    private location: Location, private blogentriesService: BlogentriesService, private blogService: BlogService, private commentService: CommentService
+  isLoggedIn = false;
+  userId = '';
+
+  constructor( private route: ActivatedRoute, private location: Location, private blogentriesService: BlogentriesService, private tokenStorage: TokenStorageService, private blogService: BlogService, private commentService: CommentService
     ) { }
-  
+
   getBlogentries(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogentriesService.getBlogsentries(id)
       .subscribe(
-        blogentries => this.blogentries = this.blogentries
+        blogentries => this.blogentries = blogentries
         );
         console.log(this.blogentries)
   }
   ngOnInit(): void {
-    console.log("init"); 
+    console.log("init");
     this.getBlogentries();
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.userId = this.tokenStorage.getUserId();
+    }
   }
+
   loadComments(blogentryId: string): void{
+    console.log(this.blogentries);
     console.log("load comments" + blogentryId);
     this.commentService.getCommentsByBlogentry(blogentryId)
     .subscribe(comments => this.comments = comments);
@@ -48,7 +56,7 @@ export class BlogentriesComponent implements OnInit {
     console.log("posted" + this.commentText);
     this.commentService.addComment({"text": this.commentText, "blogentry": blogentryId}).subscribe(comment => {
       this.comments.push(comment);
-    });;
+    });
   }
   deleteComment(commentId: string):void{
     this.commentService.deleteComment(commentId).subscribe();
