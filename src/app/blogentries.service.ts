@@ -9,13 +9,13 @@ import { Blogentry } from './blogentries/blogentry';
 })
 export class BlogentriesService {
 
-  private commentUrl = 'http://localhost:3000/api/comment';
-  private blogentryUrl = 'http://localhost:3000/api/blogentry'
+  private commentUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/comment';
+  private blogentryUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/blogentry'
 
   constructor(private http: HttpClient) { }
 
 
-  private blogsUrl = 'http://localhost:3000/api/blog';
+  private blogsUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/blog';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

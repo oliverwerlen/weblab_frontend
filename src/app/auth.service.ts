@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap, shareReplay } from 'rxjs/operators';
 import { User } from './user/user';
 
-const authUrl = 'http://localhost:3000/api/auth';
+const authUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/auth';
 
 
 
@@ -20,7 +20,7 @@ httpOptions = {
 
   login(formData): Observable<any> {
     let credentials = JSON.stringify({ "username": formData["name"], "password": formData["password"]});
-    
+
     console.log(credentials)
     return this.http.post(authUrl + '/login', credentials, this.httpOptions);
   }

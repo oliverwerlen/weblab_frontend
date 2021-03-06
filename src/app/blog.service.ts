@@ -12,8 +12,8 @@ export class BlogService {
   constructor(
     private http: HttpClient
   ) { }
-  
-  private blogsUrl = 'http://localhost:3000/api/blog';
+
+  private blogsUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/blog';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
