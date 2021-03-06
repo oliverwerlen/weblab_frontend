@@ -21,11 +21,11 @@ export class BlogentriesComponent implements OnInit {
   comments: Comment[];
   commentText: string;
   loaded = false;
-  
+
   constructor(  private route: ActivatedRoute,
     private location: Location, private blogentriesService: BlogentriesService, private blogService: BlogService, private commentService: CommentService
     ) { }
-  
+
   getBlogentries(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogService.getBlog(id)
@@ -34,9 +34,10 @@ export class BlogentriesComponent implements OnInit {
         );
   }
   ngOnInit(): void {
-    console.log("init"); 
+    console.log("init");
     this.getBlogentries();
   }
+
   loadComments(blogentryId: string): void{
     console.log("load comments" + blogentryId);
     this.commentService.getCommentsByBlogentry(blogentryId)
@@ -47,7 +48,7 @@ export class BlogentriesComponent implements OnInit {
     console.log("posted" + this.commentText);
     this.commentService.addComment({"text": this.commentText, "blogentry": blogentryId}).subscribe(comment => {
       this.comments.push(comment);
-    });;
+    });
   }
   deleteComment(commentId: string):void{
     this.commentService.deleteComment(commentId).subscribe();

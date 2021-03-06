@@ -11,9 +11,14 @@
               <mat-panel-title>
                   Comments
               </mat-panel-title>
-              <mat-panel-description> 
+              <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
+            <p *ngFor="let comment of blogentry.comments" class="comments">
+              <script>console.log(comment)</script>
+              <span (click)="deleteComment(comment._id)" class="material-icons">delete</span>
+              {{comment.text}}
+            </p>
             <form (submit)="postComment(blogentry._id)" name = "commentForm">
                 <mat-form-field>
                     <mat-label>Comment</mat-label>
@@ -21,12 +26,9 @@
                 </mat-form-field>
                 <button type = "submit" mat-raised-button color="primary">Post</button>
             </form>
-            <p *ngFor="let comment of blogentry.comment" class="comments">
-                <span (click)="deleteComment(comment._id)" class="material-icons">delete</span>
-                {{comment.text}}
-            </p>
+
           </mat-expansion-panel>
 
-        
+
     </mat-card>
     <button mat-raised-button color="primary"(click)="goBack()">Back</button>

@@ -20,7 +20,7 @@ export class BlogComponent implements OnInit {
   roles: string[] = [];
   formGroup: FormGroup;
   constructor(private blogService: BlogService, private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private formBuilder: FormBuilder ) { }
-  
+
 
   getBlogs(): void{
     this.blogService.getBlogs()
@@ -29,7 +29,7 @@ export class BlogComponent implements OnInit {
 
   deleteBlog(id: string):void{
     this.blogService.deleteBlog(id)
-    .subscribe(() => this.openSnackBar("deleted"))  
+    .subscribe(() => this.openSnackBar("deleted"))
   }
 
   updateBlog(blog: Blog, blogId: string):void{
@@ -51,8 +51,6 @@ export class BlogComponent implements OnInit {
       'title': [null, Validators.required],
       'description': [null, Validators.required]
     });
-
-    
   }
 
   showUpdateForm(blog: Blog):void{
