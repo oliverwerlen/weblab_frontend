@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BLOGS } from './mock-blogs';
 import { Blog } from './blog/blog';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -10,7 +9,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class BlogService {
 
+  constructor(
+    private http: HttpClient
+  ) { }
+  
   private blogsUrl = 'http://localhost:3000/api/blog';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   getBlogs(): Observable<Blog[]> {
     return this.http.get<Blog[]>(this.blogsUrl)
@@ -26,9 +32,24 @@ export class BlogService {
       catchError(this.handleError<Blog>(`getBlog id=${id}`))
     );
   }
-  constructor(
-    private http: HttpClient
-  ) { }
+
+  deleteBlog(id: string):Observable<Blog>{
+    const url = `${this.blogsUrl}/${id}`;
+    return this.http.delete<Blog>(url).pipe(
+      tap(_ => console.log(`deleted blog id=${id}`)),
+      catchError(this.handleError<Blog>(`delete Blog id=${id}`))
+    );
+  }
+
+  updateBlog(blog: Blog, blogId: string):Observable<any>{
+    console.log(blogId)
+    const url = `${this.blogsUrl}/${blogId}`;
+    return this.http.patch(url, blog, this.httpOptions).pipe(
+      tap(_ => console.log(`updated blog`)),
+      catchError(this.handleError<Blog>(`updated blog`))
+    );
+  }
+
 
   /**
  * Handle Http operation that failed.
