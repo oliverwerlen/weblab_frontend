@@ -34,6 +34,7 @@ export class BlogentriesComponent implements OnInit {
       .subscribe(
         blogentries => this.blogentries = blogentries
         );
+        console.log(this.blogentries)
   }
   ngOnInit(): void {
     console.log("init");

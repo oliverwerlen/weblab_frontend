@@ -1,6 +1,6 @@
 .blog-cards {
     max-width: 100%;
-    margin: 5%;
+    margin-top: 5%;
 }
 .buttonAdd{
     float: right;
@@ -23,4 +23,8 @@
 .blog-container {
   margin-left: 5%;
   margin-right: 5%;
+}
+.controlsBlog{
+    margin-top: 5%;
+    margin-right: 5%;
 }

@@ -44,9 +44,17 @@ export class BlogService {
   updateBlog(blog: Blog, blogId: string):Observable<any>{
     console.log(blogId)
     const url = `${this.blogsUrl}/${blogId}`;
+    console.log(url)
     return this.http.patch(url, blog, this.httpOptions).pipe(
       tap(_ => console.log(`updated blog`)),
       catchError(this.handleError<Blog>(`updated blog`))
+    );
+  }
+
+  addBlog(blog: Blog):Observable<any>{
+    return this.http.post(this.blogsUrl, blog, this.httpOptions).pipe(
+      tap(_ => console.log(`added blog`)),
+      catchError(this.handleError<Blog>(`added blog`))
     );
   }
 
