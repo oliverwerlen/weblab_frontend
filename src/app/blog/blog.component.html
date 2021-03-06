@@ -14,7 +14,7 @@
       </mat-form-field>
 
       <div class="form-element">
-        <button mat-raised-button color="primary" class="button" (click)="addBlog(formGroup.value)">Update Blog</button>
+        <button mat-raised-button color="primary" class="button" (click)="addBlog(formGroup.value)">Add Blog</button>
       </div>
     </form>
   </div>
@@ -22,7 +22,7 @@
 
     <mat-card-header>
       <mat-card-title>{{blog.title}}</mat-card-title>
-      <mat-card-subtitle>{{blog.creator.email}}</mat-card-subtitle>
+      <mat-card-subtitle>{{blog.description}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
       <button mat-raised-button color="primary" routerLink="/blog/{{blog._id}}"> Show Blogentries</button>

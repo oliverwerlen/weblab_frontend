@@ -32,29 +32,37 @@ export class BlogComponent implements OnInit {
 
   deleteBlog(id: string): void {
     this.blogService.deleteBlog(id)
-    .subscribe(() => this.openSnackBar("deleted"));
-    this.reloadPage();
+    .subscribe(() => {
+      this.blogs = this.blogs.filter((blog) => blog._id !== id);
+      this.openSnackBar("Blog gelöscht!");
+    });
   }
 
   addBlog(blog: Blog): void {
     this.blogService.addBlog(blog)
-    .subscribe(() => this.openSnackBar("added"));
-    this.reloadPage();
+    .subscribe((newBlog) => {
+      this.blogs.push(newBlog);
+      this.openSnackBar("Blog erstellt!");
+    });
   }
 
   updateBlog(blog: Blog, blogId: string): void {
     console.log(blog);
     this.blogService.updateBlog(blog, blogId)
-    .subscribe(() => this.openSnackBar("updated"));
-    this.reloadPage();
+    .subscribe((updatedBlog) => {
+      const indexOfBlog = this.blogs.findIndex(x => x._id === blogId);
+      this.blogs[indexOfBlog] = updatedBlog;
+      this.updateForm = "";
+      this.openSnackBar("Blog aktualisiert!");
+    });
   }
 
 
   isCreatedByCurrentUser(createdUserId: String){
-    if(this.isLoggedIn){
-      if(this.tokenStorage.getUserId() == createdUserId){
+    if (this.isLoggedIn){
+      if (this.tokenStorage.getUserId() == createdUserId){
         return true;
-      }else{return false;}
+      } else {return false; }
     }else{return false;}
   }
 
@@ -72,7 +80,7 @@ export class BlogComponent implements OnInit {
   showUpdateForm(blog: Blog):void{
     if(this.updateForm){
       this.updateForm= "";
-    }else{
+    } else {
       this.createForm();
       this.formGroup.controls['title'].setValue(blog.title)
       this.formGroup.controls['description'].setValue(blog.description)
@@ -89,6 +97,7 @@ export class BlogComponent implements OnInit {
       this.createForm();
     }
   }
+
   ngOnInit(): void {
     this.getBlogs();
     if (this.tokenStorage.getToken()) {
