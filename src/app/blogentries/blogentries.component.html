@@ -32,6 +32,22 @@
         <button mat-icon-button color="primary" (click)="deleteBlogentry(blogentry._id)"> <span class="material-icons">delete</span></button>
     </div>
 
+    <div *ngIf="updateForm == blogentry._id">
+        <form [formGroup]="formGroup" class="form">
+          <mat-form-field class="form-element">
+            <input matInput placeholder={{blogentry.title}} formControlName="title">
+          </mat-form-field>
+
+          <mat-form-field class="form-element">
+            <input matInput placeholder={{blogentry.description}} formControlName="description">
+          </mat-form-field>
+
+          <div class="form-element">
+            <button mat-raised-button color="primary" class="button" (click)="updateBlogentry(formGroup.value, blogentry._id)">Update Blogentry</button>
+          </div>
+        </form>
+      </div>
+
     <mat-expansion-panel (opened) = "loadComments(blogentry._id)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>

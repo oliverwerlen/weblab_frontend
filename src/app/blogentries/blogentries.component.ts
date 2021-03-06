@@ -28,6 +28,7 @@ export class BlogentriesComponent implements OnInit {
   showAddBlogentry = false;
   userId = '';
   formGroup: FormGroup;
+  updateForm = "";
 
   constructor( private route: ActivatedRoute, private location: Location, private blogentriesService: BlogentriesService, private tokenStorage: TokenStorageService, private blogService: BlogService, private commentService: CommentService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
 
@@ -62,6 +63,15 @@ export class BlogentriesComponent implements OnInit {
     }else{
       this.addForm=true
       this.createForm();
+    }
+  }
+  showUpdateForm(blogentry: Blogentry):void{
+    console.log(blogentry)
+    if(this.updateForm){
+      this.updateForm= "";
+    }else{
+      this.createForm();
+      this.updateForm = blogentry._id;
     }
   }
 
@@ -116,6 +126,7 @@ export class BlogentriesComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
 
   openSnackBar(message: string) {
     this._snackBar.open(message, "Close", {
