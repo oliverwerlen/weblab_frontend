@@ -11,6 +11,8 @@ import { Comment } from './comment';
 import { Blogentry } from './blogentry'
 import {TokenStorageService} from "../token-storage.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+
 
 @Component({
   selector: 'app-blogentries',
@@ -51,7 +53,8 @@ export class BlogentriesComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       'title': [null, Validators.required],
       'description': [null, Validators.required], 
-      'blogid': [null, Validators.required]
+      'blogid': [null, Validators.required],
+      'imageid': [null, Validators.required]
     });
     const id = this.route.snapshot.paramMap.get('id');
     this.formGroup.controls['blogid'].setValue(id)
@@ -65,6 +68,15 @@ export class BlogentriesComponent implements OnInit {
       this.createForm();
     }
   }
+
+  uploadEvent($event: any) {
+    if($event.event.body){
+      let imageId = $event.event.body[0]._id;
+      console.log(imageId)
+      this.formGroup.controls['imageid'].setValue(imageId)
+    }
+  }
+
   showUpdateForm(blogentry: Blogentry):void{
     console.log(blogentry)
     if(this.updateForm){

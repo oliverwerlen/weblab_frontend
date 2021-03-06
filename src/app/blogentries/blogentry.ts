@@ -10,4 +10,5 @@ export interface Blogentry{
     createDate: Date
     user: User
     updateDate: Date 
+    image: string
 }
