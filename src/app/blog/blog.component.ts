@@ -21,7 +21,7 @@ export class BlogComponent implements OnInit {
   addForm = false;
   roles: string[] = [];
   formGroup: FormGroup;
-  
+
   constructor(private blogService: BlogService, private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private router: Router ) { }
 
 
@@ -30,23 +30,23 @@ export class BlogComponent implements OnInit {
     .subscribe(blogs => this.blogs = blogs);
   }
 
-  deleteBlog(id: string):void{
+  deleteBlog(id: string): void {
     this.blogService.deleteBlog(id)
-    .subscribe(() => this.openSnackBar("deleted"))
-    this.reloadPage()
+    .subscribe(() => this.openSnackBar("deleted"));
+    this.reloadPage();
   }
 
-  addBlog(blog: Blog):void{
+  addBlog(blog: Blog): void {
     this.blogService.addBlog(blog)
-    .subscribe(() => this.openSnackBar("added"))
-    this.reloadPage()
+    .subscribe(() => this.openSnackBar("added"));
+    this.reloadPage();
   }
 
-  updateBlog(blog: Blog, blogId: string):void{
-    console.log(blog)
+  updateBlog(blog: Blog, blogId: string): void {
+    console.log(blog);
     this.blogService.updateBlog(blog, blogId)
-    .subscribe(() => this.openSnackBar("updated"))
-    this.reloadPage()
+    .subscribe(() => this.openSnackBar("updated"));
+    this.reloadPage();
   }
 
 
@@ -101,7 +101,7 @@ export class BlogComponent implements OnInit {
 
   openSnackBar(message: string) {
     this._snackBar.open(message, "Close", {
-      duration: 2000, 
+      duration: 2000,
     });
   }
 

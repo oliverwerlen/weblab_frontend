@@ -18,7 +18,7 @@
         </mat-expansion-panel-header>
         <p *ngFor="let comment of blogentry.comments" class="comments">
           {{comment.text}}
-          <span *ngIf="blogentry.creator._id == this.userId" (click)="deleteComment(comment._id)" class="material-icons">delete</span>
+          <button *ngIf="blogentry.creator._id == this.userId" (click)="deleteComment(comment._id, blogentry._id)" mat-raised-button color="primary">Delete</button>
         </p>
         <form (submit)="postComment(blogentry._id)" name = "commentForm">
           <mat-form-field>
@@ -27,7 +27,6 @@
           </mat-form-field>
           <button type = "submit" mat-raised-button color="primary">Create</button>
         </form>
-
       </mat-expansion-panel>
 
 

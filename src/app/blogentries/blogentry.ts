@@ -3,7 +3,7 @@ import { User } from '../user/user';
 import { Comment } from './comment';
 
 export interface Blogentry {
-    id: string;
+    _id: string;
     title: string;
     destination: string;
     description: string;

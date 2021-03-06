@@ -1,14 +1,11 @@
-import { I18nPluralPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Blog } from '../blog/blog';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { BlogentriesService } from '../blogentries.service';
 import { BlogService } from '../blog.service';
 import { CommentService } from '../comment.service';
-import { NgForm } from '@angular/forms';
 import { Comment } from './comment';
-import { Blogentry } from './blogentry'
+import { Blogentry } from './blogentry';
 import {TokenStorageService} from "../token-storage.service";
 
 @Component({
@@ -34,8 +31,8 @@ export class BlogentriesComponent implements OnInit {
       .subscribe(
         blogentries => this.blogentries = blogentries
         );
-        console.log(this.blogentries)
-  }
+  };
+
   ngOnInit(): void {
     console.log("init");
     this.getBlogentries();
@@ -55,11 +52,22 @@ export class BlogentriesComponent implements OnInit {
   postComment(blogentryId: string): void{
     console.log("Create " + this.commentText + " with " + blogentryId);
     this.commentService.addComment({"text": this.commentText, "blogentry": blogentryId}).subscribe(comment => {
-      this.comments.push(comment);
+      this.blogentries.forEach((blogentry) => {
+        if (blogentry._id === blogentryId) { blogentry.comments.push(comment); }
+      });
     });
+    this.commentText = '';
   }
-  deleteComment(commentId: string):void{
+  deleteComment(commentId: string, blogentryId: string): void {
     this.commentService.deleteComment(commentId).subscribe();
+    // tslint:disable-next-line:triple-equals
+    this.blogentries.forEach((blogentry) => {
+      if (blogentry._id === blogentryId) {
+        blogentry.comments = blogentry.comments.filter((comment) => comment._id !== commentId);
+        console.log(blogentry.comments);
+      }
+    });
+    console.log(this.blogentries);
   }
 
   goBack(): void {
