@@ -52,7 +52,7 @@ export class BlogentriesComponent implements OnInit {
   }
 
   postComment(blogentryId: string): void{
-    console.log("posted" + this.commentText);
+    console.log("Create " + this.commentText + " with " + blogentryId);
     this.commentService.addComment({"text": this.commentText, "blogentry": blogentryId}).subscribe(comment => {
       this.comments.push(comment);
     });
