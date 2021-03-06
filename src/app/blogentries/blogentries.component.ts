@@ -1,7 +1,6 @@
 import { I18nPluralPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Blog } from '../blog/blog';
-import { Blogentry } from '../blogentries/blogentry'
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { BlogentriesService } from '../blogentries.service';
@@ -9,6 +8,7 @@ import { BlogService } from '../blog.service';
 import { CommentService } from '../comment.service';
 import { NgForm } from '@angular/forms';
 import { Comment } from './comment';
+import { Blogentry } from './blogentry'
 
 @Component({
   selector: 'app-blogentries',
@@ -17,7 +17,7 @@ import { Comment } from './comment';
 })
 export class BlogentriesComponent implements OnInit {
 
-  blog: Blog;
+  blogentries: Blogentry[];
   comments: Comment[];
   commentText: string;
   loaded = false;
@@ -28,9 +28,9 @@ export class BlogentriesComponent implements OnInit {
 
   getBlogentries(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.blogService.getBlog(id)
+    this.blogentriesService.getBlogsentries(id)
       .subscribe(
-        blog => this.blog = blog
+        blogentries => this.blogentries = this.blogentries
         );
   }
   ngOnInit(): void {
