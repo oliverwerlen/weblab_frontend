@@ -14,10 +14,28 @@
         <mat-form-field *ngHide class="form-element">
             <input matInput placeholder="blogid" formControlName="blogid">
         </mat-form-field>
+        <mat-form-field *ngHide class="form-element">
+            <input matInput placeholder="imageid" formControlName="imageid">
+        </mat-form-field>
+
+
+        <label for="singleFile">Upload file</label>
+        <input id="singleFile" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
+        <br>
+
+        <mat-file-upload-queue #fileUploadQueue
+            [fileAlias]="'file'"
+            [httpUrl]="'http://localhost:3000/api/image'">
+            <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index " (onUpload)="uploadEvent($event)"></mat-file-upload>
+        </mat-file-upload-queue>
+        
         <div class="form-element">
         <button mat-raised-button color="primary" class="button" (click)="addBlogentry(formGroup.value)">Add Blogentry</button>
         </div>
+
     </form>
+
+
     </div>
     <mat-card *ngFor="let blogentry of blogentries" class = "blogentry-cards">
     <mat-card-header>
@@ -26,7 +44,10 @@
     <mat-card-content>
       {{blogentry.description}}
       {{blogentry.createDate}}
+      {{blogentry.image}}
+
     </mat-card-content>
+    <img mat-card-image src="http://localhost:3000/api/image/{{blogentry.image}}" alt="Photo of a Shiba Inu">
 
     <div class = "controlsBlogentry" *ngIf="isCreatedByCurrentUser(blogentry.creator._id)">
         <button mat-icon-button color="primary" (click)="showUpdateForm(blogentry)"> <span class="material-icons">mode_edit</span></button>

@@ -11,4 +11,5 @@ export interface Blogentry {
     creator: User;
     updateDate: Date;
     comments: Comment[];
+    image: string;
 }

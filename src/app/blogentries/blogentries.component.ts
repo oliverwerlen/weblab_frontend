@@ -17,7 +17,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   templateUrl: './blogentries.component.html',
   styleUrls: ['./blogentries.component.css']
 })
-
 export class BlogentriesComponent implements OnInit {
 
   blogentries: Blogentry[];
@@ -42,7 +41,6 @@ export class BlogentriesComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log("init");
     this.getBlogentries();
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
@@ -54,7 +52,8 @@ export class BlogentriesComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       'title': [null, Validators.required],
       'description': [null, Validators.required],
-      'blogid': [null, Validators.required]
+      'blogid': [null, Validators.required],
+      'imageid': [null, Validators.required]
     });
     const id = this.route.snapshot.paramMap.get('id');
     this.formGroup.controls['blogid'].setValue(id)
@@ -68,6 +67,15 @@ export class BlogentriesComponent implements OnInit {
       this.createForm();
     }
   }
+
+  uploadEvent($event: any) {
+    if($event.event.body){
+      let imageId = $event.event.body[0]._id;
+      console.log(imageId)
+      this.formGroup.controls['imageid'].setValue(imageId)
+    }
+  }
+
   showUpdateForm(blogentry: Blogentry):void{
     if(this.updateForm){
       this.updateForm= "";

@@ -29,6 +29,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { LoginComponent } from './login-component/login.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { authInterceptorProviders } from './auth.interceptor';
+import { MatFileUploadModule } from 'angular-material-fileupload'
+
 
 
 @NgModule({
@@ -62,7 +64,8 @@ import { authInterceptorProviders } from './auth.interceptor';
     MatMenuModule, 
     MatFormFieldModule, 
     MatDialogModule, 
-    MatSnackBarModule
+    MatSnackBarModule, 
+    MatFileUploadModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
