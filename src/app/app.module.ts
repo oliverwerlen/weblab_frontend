@@ -28,6 +28,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import { LoginComponent } from './login-component/login.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { authInterceptorProviders } from './auth.interceptor';
 
 
 
@@ -67,7 +68,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule, 
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

@@ -28,4 +28,9 @@ export class TokenStorageService {
     let token_decoded = jwt_decode(this.getToken());
     return token_decoded["role"];
   }
+
+  public getUserId(): any {
+    let token_decoded = jwt_decode(this.getToken());
+    return token_decoded["id"];
+  }
 }

@@ -4,7 +4,6 @@ import { Blog } from '../blog/blog';
 import { Blogentry } from '../blogentries/blogentry'
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { BLOGENTRIES } from '../mock-blogs';
 import { BlogentriesService } from '../blogentries.service';
 import { BlogService } from '../blog.service';
 import { CommentService } from '../comment.service';
