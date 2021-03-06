@@ -10,6 +10,7 @@ import { TokenStorageService } from './token-storage.service';
   styleUrls: ['./app.component.css']
 
 })
+
 export class AppComponent {
   title = 'travelBlogg';
   mobileQuery: MediaQueryList;
@@ -17,7 +18,7 @@ export class AppComponent {
   private roles: string[] = [];
   isLoggedIn = false;
   showLoggedInNav = false;
-  
+
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private tokenStorageService: TokenStorageService) {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -37,5 +38,5 @@ export class AppComponent {
     this.isLoggedIn = false;
     this.tokenStorageService.signOut();
   }
-  
+
 }

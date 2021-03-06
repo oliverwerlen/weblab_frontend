@@ -1,8 +1,8 @@
 <div class="blogentry-background">
 <div class="blogentry-container">
-<h1>Blogentries <button *ngIf="isLoggedIn" mat-icon-button color="primary" (click) = "showAddForm()" class = "buttonAdd"><span class="material-icons">add</span></button></h1>
+  <h2>Blogeinträge <button *ngIf="isLoggedIn" mat-icon-button color="primary" (click) = "showAddForm()" class = "buttonAdd"><span class="material-icons">add</span></button></h2>
     <div *ngIf="addForm">
-        <h2>Add a new Blogentry</h2>
+        <h2>Erstelle einen neuen Blogeintrag</h2>
     <form [formGroup]="formGroup" class="form">
         <mat-form-field class="form-element">
         <input matInput placeholder="title" formControlName="title">
@@ -17,9 +17,7 @@
         <mat-form-field *ngHide class="form-element">
             <input matInput placeholder="imageid" formControlName="imageid">
         </mat-form-field>
-
-
-        <label for="singleFile">Upload file</label>
+        <br>
         <input id="singleFile" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
         <br>
 
@@ -28,7 +26,7 @@
             [httpUrl]="'http://localhost:3000/api/image'">
             <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index " (onUpload)="uploadEvent($event)"></mat-file-upload>
         </mat-file-upload-queue>
-        
+
         <div class="form-element">
         <button mat-raised-button color="primary" class="button" (click)="addBlogentry(formGroup.value)">Add Blogentry</button>
         </div>
@@ -40,14 +38,12 @@
     <mat-card *ngFor="let blogentry of blogentries" class = "blogentry-cards">
     <mat-card-header>
       <mat-card-title>{{blogentry.title}}</mat-card-title>
+      <mat-card-subtitle>Von {{blogentry.creator.username}}, {{blogentry.createDate | date: "MMM d, y, h:mm:ss a"}} </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       {{blogentry.description}}
-      {{blogentry.createDate}}
-      {{blogentry.image}}
-
     </mat-card-content>
-    <img mat-card-image src="http://localhost:3000/api/image/{{blogentry.image}}" alt="Photo of a Shiba Inu">
+    <img *ngIf="blogentry.image" mat-card-image src="http://localhost:3000/api/image/{{blogentry.image}}" alt="Photo of a Shiba Inu">
 
     <div class = "controlsBlogentry" *ngIf="isCreatedByCurrentUser(blogentry.creator._id)">
         <button mat-icon-button color="primary" (click)="showUpdateForm(blogentry)"> <span class="material-icons">mode_edit</span></button>
@@ -73,27 +69,28 @@
     <mat-expansion-panel (opened) = "loadComments(blogentry._id)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Comments
+          Kommentare
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngFor="let comment of blogentry.comments" class="comments">
         {{comment.text}}
-        <button *ngIf="blogentry.creator._id == this.userId" (click)="deleteComment(comment._id, blogentry._id)" mat-raised-button color="primary">Delete</button>
+        <button *ngIf="blogentry.creator._id == this.userId" mat-icon-button color="primary" (click)="deleteComment(comment._id, blogentry._id)"> <span class="material-icons">delete</span></button>
+        <br>
+        Von {{comment.creator.username}}, {{comment.createDate | date: "MMM d, y, h:mm:ss a"}}
       </p>
       <form (submit)="postComment(blogentry._id)" name = "commentForm">
         <mat-form-field>
-          <mat-label>Comment</mat-label>
+          <mat-label>Kommentar</mat-label>
           <input matInput [(ngModel)]="commentText" name = "commentText">
         </mat-form-field>
-        <button type = "submit" mat-raised-button color="primary">Post</button>
+        <button type = "submit" mat-raised-button color="primary">Erstellen</button>
       </form>
 
     </mat-expansion-panel>
 
-
     </mat-card>
-    <button mat-raised-button color="primary"(click)="goBack()">Back</button>
+    <button style="margin-bottom: 5%" mat-raised-button color="primary"(click)="goBack()">Zurück</button>
   </div>
 </div>

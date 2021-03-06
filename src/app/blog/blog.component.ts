@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
-import { Blog } from './blog';
-import { BlogService} from '../blog.service';
-import { Observable, of } from 'rxjs';
-import { TokenStorageService } from '../token-storage.service';
+import {Blog} from './blog';
+import {BlogService} from '../blog.service';
+import {Observable, of} from 'rxjs';
+import {TokenStorageService} from '../token-storage.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -22,51 +22,55 @@ export class BlogComponent implements OnInit {
   roles: string[] = [];
   formGroup: FormGroup;
 
-  constructor(private blogService: BlogService, private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private router: Router ) { }
+  constructor(private blogService: BlogService, private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private router: Router) {
+  }
 
 
-  getBlogs(): void{
+  getBlogs(): void {
     this.blogService.getBlogs()
-    .subscribe(blogs => this.blogs = blogs);
+      .subscribe(blogs => this.blogs = blogs);
   }
 
   deleteBlog(id: string): void {
     this.blogService.deleteBlog(id)
-    .subscribe(() => {
-      this.blogs = this.blogs.filter((blog) => blog._id !== id);
-      this.openSnackBar("Blog gelöscht!");
-    });
+      .subscribe(() => {
+        this.blogs = this.blogs.filter((blog) => blog._id !== id);
+        this.openSnackBar('Blog gelöscht!');
+      });
   }
 
   addBlog(blog: Blog): void {
     this.blogService.addBlog(blog)
-    .subscribe((newBlog) => {
-      this.blogs.push(newBlog);
-      this.openSnackBar("Blog erstellt!");
-    });
+      .subscribe((newBlog) => {
+        this.blogs.push(newBlog);
+        this.openSnackBar('Blog erstellt!');
+      });
   }
 
   updateBlog(blog: Blog, blogId: string): void {
     console.log(blog);
     this.blogService.updateBlog(blog, blogId)
-    .subscribe((updatedBlog) => {
-      const indexOfBlog = this.blogs.findIndex(x => x._id === blogId);
-      this.blogs[indexOfBlog] = updatedBlog;
-      this.updateForm = "";
-      this.openSnackBar("Blog aktualisiert!");
-    });
+      .subscribe((updatedBlog) => {
+        const indexOfBlog = this.blogs.findIndex(x => x._id === blogId);
+        this.blogs[indexOfBlog] = updatedBlog;
+        this.updateForm = '';
+        this.openSnackBar('Blog aktualisiert!');
+      });
   }
 
-
-  isCreatedByCurrentUser(createdUserId: String){
-    if (this.isLoggedIn){
-      if (this.tokenStorage.getUserId() == createdUserId){
+  isCreatedByCurrentUser(createdUserId: String) {
+    if (this.isLoggedIn) {
+      if (this.tokenStorage.getUserId() == createdUserId) {
         return true;
-      } else {return false; }
-    }else{return false;}
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
-  createForm(){
+  createForm() {
     this.formGroup = this.formBuilder.group({
       'title': [null, Validators.required],
       'description': [null, Validators.required]
@@ -77,23 +81,23 @@ export class BlogComponent implements OnInit {
     window.location.reload();
   }
 
-  showUpdateForm(blog: Blog):void{
-    if(this.updateForm){
-      this.updateForm= "";
+  showUpdateForm(blog: Blog): void {
+    if (this.updateForm) {
+      this.updateForm = '';
     } else {
       this.createForm();
-      this.formGroup.controls['title'].setValue(blog.title)
-      this.formGroup.controls['description'].setValue(blog.description)
+      this.formGroup.controls['title'].setValue(blog.title);
+      this.formGroup.controls['description'].setValue(blog.description);
       this.updateForm = blog._id;
       this.updateForm = blog._id;
     }
   }
 
-  showAddForm():void{
-    if(this.addForm){
+  showAddForm(): void {
+    if (this.addForm) {
       this.addForm = false;
-    }else{
-      this.addForm=true
+    } else {
+      this.addForm = true;
       this.createForm();
     }
   }
@@ -103,13 +107,11 @@ export class BlogComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUserRole();
-      //this.goToLogin();
-      console.log(this.roles);
     }
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, "Close", {
+    this._snackBar.open(message, 'Close', {
       duration: 2000,
     });
   }

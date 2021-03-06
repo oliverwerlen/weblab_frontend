@@ -1,6 +1,7 @@
 .blog-cards {
     max-width: 100%;
     margin-top: 5%;
+  margin-bottom: 5%;
 }
 .buttonAdd{
     float: right;
@@ -11,14 +12,6 @@
   margin-top: 2%;
 }
 
-.blog-container-background{
-  background-image: url("https://cdn.pixabay.com/photo/2015/11/07/11/24/road-1031108_1280.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100%;
-  width: auto;
-}
 
 .blog-container {
   margin-left: 5%;

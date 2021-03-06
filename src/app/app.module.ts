@@ -29,7 +29,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { LoginComponent } from './login-component/login.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { authInterceptorProviders } from './auth.interceptor';
-import { MatFileUploadModule } from 'angular-material-fileupload'
+import { MatFileUploadModule } from 'angular-material-fileupload';
 
 
 
@@ -46,29 +46,29 @@ import { MatFileUploadModule } from 'angular-material-fileupload'
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
-    AppRoutingModule, 
-    MatCardModule, 
-    MatSidenavModule, 
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatCardModule,
+    MatSidenavModule,
     MatListModule,
-    MatIconModule, 
-    MatToolbarModule, 
-    MatButtonModule, 
-    HttpClientModule, 
-    MatExpansionModule, 
-    MatInputModule, 
-    ReactiveFormsModule, 
-    FormsModule, 
-    MatRippleModule, 
-    MatGridListModule, 
-    MatMenuModule, 
-    MatFormFieldModule, 
-    MatDialogModule, 
-    MatSnackBarModule, 
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    HttpClientModule,
+    MatExpansionModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatRippleModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatSnackBarModule,
     MatFileUploadModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }

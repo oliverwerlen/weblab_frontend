@@ -36,8 +36,10 @@ export class BlogentriesComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogentriesService.getBlogsentries(id)
       .subscribe(
-        blogentries => this.blogentries = blogentries
-        );
+        blogentries => {
+          this.blogentries = blogentries;
+          console.log(this.blogentries);
+        });
   };
 
   ngOnInit(): void {

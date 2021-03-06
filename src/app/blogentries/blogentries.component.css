@@ -1,19 +1,16 @@
 .blogentry-cards {
-    max-width: 50%;
     margin-top: 5%;
+    margin-bottom: 5%;
 }
 .blogentry-container {
   margin-left: 5%;
   margin-right: 5%;
 }
 
-.blogentry-background {
-  background-image: url("https://cdn.pixabay.com/photo/2017/12/15/14/03/new-zealand-3021090_1280.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100%;
-  width: auto;
+.buttonAdd{
+  float: right;
+  margin-top: 2%;
 }
+
 
 
