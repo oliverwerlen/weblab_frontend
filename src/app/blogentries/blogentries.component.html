@@ -1,6 +1,6 @@
 <div class="blogentry-background">
 <div class="blogentry-container">
-  <h2>Blogeinträge <button *ngIf="isLoggedIn" mat-icon-button color="primary" (click) = "showAddForm()" class = "buttonAdd"><span class="material-icons">add</span></button></h2>
+  <h2>Blogeinträge <button *ngIf="isBlogCreator" mat-icon-button color="primary" (click) = "showAddForm()" class = "buttonAdd"><span class="material-icons">add</span></button></h2>
     <div *ngIf="addForm">
         <h2>Erstelle einen neuen Blogeintrag</h2>
     <form [formGroup]="formGroup" class="form">
@@ -87,9 +87,7 @@
         </mat-form-field>
         <button type = "submit" mat-raised-button color="primary">Erstellen</button>
       </form>
-
     </mat-expansion-panel>
-
     </mat-card>
     <button style="margin-bottom: 5%" mat-raised-button color="primary"(click)="goBack()">Zurück</button>
   </div>

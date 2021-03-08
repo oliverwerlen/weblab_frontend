@@ -29,6 +29,7 @@ export class BlogentriesComponent implements OnInit {
   userId = '';
   formGroup: FormGroup;
   updateForm = "";
+  isBlogCreator = false;
 
   constructor( private route: ActivatedRoute, private location: Location, private blogentriesService: BlogentriesService, private tokenStorage: TokenStorageService, private blogService: BlogService, private commentService: CommentService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
 
@@ -38,7 +39,6 @@ export class BlogentriesComponent implements OnInit {
       .subscribe(
         blogentries => {
           this.blogentries = blogentries;
-          console.log(this.blogentries);
         });
   };
 
@@ -47,6 +47,7 @@ export class BlogentriesComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.userId = this.tokenStorage.getUserId();
+      this.isBlogOfUser();
     }
   }
 
@@ -158,6 +159,21 @@ export class BlogentriesComponent implements OnInit {
     this._snackBar.open(message, "Close", {
       duration: 2000,
     });
+  }
+
+  isBlogOfUser(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.blogService.getBlog(id)
+      .subscribe((blog) => {
+        console.log(blog);
+        console.log(this.userId);
+        if (blog.creator._id === this.userId) {
+          this.isBlogCreator = true;
+        } else {
+          this.isBlogCreator = false;
+        }
+      });
+
   }
 
 }
