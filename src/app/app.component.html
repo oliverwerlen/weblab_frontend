@@ -12,17 +12,17 @@
         <mat-icon > account_box</mat-icon>
         <a routerLink="/myAccount">My Account</a>
       </button>
-      <button *ngIf="isLoggedIn" mat-menu-item>
-        <mat-icon (click)="logout()">logout</mat-icon>
+      <button *ngIf="isLoggedIn" (click)="logout()" mat-menu-item>
+        <mat-icon >logout</mat-icon>
         <a (click)="logout()">Logout </a>
       </button>
-      <button *ngIf="!isLoggedIn" mat-menu-item>
+      <button *ngIf="!isLoggedIn" routerLink="/login" mat-menu-item>
         <mat-icon >login</mat-icon>
-        <a routerLink="/login">Login</a>
+        <a>Login</a>
       </button>
-      <button *ngIf="!isLoggedIn" mat-menu-item>
+      <button *ngIf="!isLoggedIn" routerLink="/register" mat-menu-item>
         <mat-icon > app_registration</mat-icon>
-        <a routerLink="/register">Register</a>
+        <a>Register</a>
       </button>
     </mat-menu>
   </mat-toolbar>
