@@ -1,23 +1,24 @@
+<div class="registerContainer">
 <h1>Register</h1>
 
-<div class="container" *ngIf="!isSuccessful" novalidate> 
+<div class="container" *ngIf="!isSuccessful" novalidate>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
-  
-      <mat-form-field class="form-element">
+
+      <mat-form-field class="form-element formContainer">
         <input matInput placeholder="Emailaddress" formControlName="email">
         <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
           {{ getErrorEmail() }}
         </mat-error>
       </mat-form-field>
-  
-      <mat-form-field class="form-element">
+
+      <mat-form-field class="form-element formContainer">
         <input matInput placeholder="Username" formControlName="name">
         <mat-error *ngIf="!name.valid && name.touched">
           {{ titleAlert }}
         </mat-error>
       </mat-form-field>
-  
-      <mat-form-field class="form-element">
+
+      <mat-form-field class="form-element formContainer">
         <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -28,13 +29,13 @@
           {{ getErrorPassword() }}
         </mat-error>
       </mat-form-field>
-  
-      <div class="form-element">
+
+      <div class="form-element formContainer">
         <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
       </div>
     </form>
   </div>
-
+</div>
 <ng-template #forminfo>
     <div class="container">
       {{ post | json }}
