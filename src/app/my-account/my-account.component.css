@@ -1,0 +1,23 @@
+.blog-cards {
+  max-width: 100%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.buttonAdd{
+  float: right;
+  margin-top: 2%;
+}
+
+.blog-title {
+  margin-top: 2%;
+}
+
+
+.blog-container {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.controlsBlog{
+  margin-top: 5%;
+  margin-right: 5%;
+}

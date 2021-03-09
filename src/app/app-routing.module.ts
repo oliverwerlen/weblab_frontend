@@ -11,23 +11,23 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login-component/login.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent }, 
-  { path: 'blog', component: BlogComponent }, 
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'blog', component: BlogComponent },
   { path: 'blog/:id', component: BlogentriesComponent },
-  { path: 'myAccount', component: MyAccountComponent }, 
-  { path: 'register', component: RegisterComponent}, 
+  { path: 'myAccount', component: MyAccountComponent },
+  { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, 
-    BrowserModule, 
+    CommonModule,
+    BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes)
-  ], 
+  ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
