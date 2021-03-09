@@ -9,7 +9,7 @@ import { Comment } from './blogentries/comment';
 })
 export class CommentService {
 
-  private commentUrl = 'http://localhost:3000/api/comment';
+  private commentUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/comment';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

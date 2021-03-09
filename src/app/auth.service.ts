@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap, shareReplay } from 'rxjs/operators';
 import { User } from './user/user';
 
-const authUrl = 'http://localhost:3000/api/auth';
+const authUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/auth';
 
 @Injectable({
   providedIn: 'root'
