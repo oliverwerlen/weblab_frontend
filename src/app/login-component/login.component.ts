@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUserRole();
       console.log(this.roles);
-      this.routeToMyAccount();
+      this.openSnackBar("You are already logged in")
+      //this.routeToMyAccount();
     }
     this.createForm();
   }
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         console.log(this.roles);
-        this.openSnackBar();
+        this.openSnackBar("User created sucessfully");
       },
       err => {
         this.errorMessage = err.error.message;
@@ -73,8 +74,8 @@ export class LoginComponent implements OnInit {
   }
 
 
-  openSnackBar() {
-    this._snackBar.open("User Logged in", "Close", {
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "Close", {
       duration: 2000
     });
     this.reloadPage();

@@ -24,11 +24,20 @@ export class RegisterComponent implements OnInit {
   roles: string[] = [];
   post: any = '';
   hide = true;
+  isLoggedIn = false;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, public dialog: MatDialog,private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
-    this.createForm();
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUserRole();
+      //this.goToLogin();
+      this.openSnackBar("Already created");
+      console.log(this.roles);
+    }else{
+      this.createForm();
+    }
   }
 
   createForm() {
@@ -82,7 +91,7 @@ export class RegisterComponent implements OnInit {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.tokenStorage.saveToken(data.token);
-        this.openSnackBar();
+        this.openSnackBar("User created sucessfully");
       },
       err => {
         this.errorMessage = err.error.message;
@@ -99,12 +108,12 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(["/myAccount"]);
   }
 
-  openSnackBar() {
-    this._snackBar.open("User created successfully", "Close", {
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "Close", {
       duration: 2000,
     });
     this.reloadPage();
-    this.routeToMyAccount();
+    //this.routeToMyAccount();
   }
 
 }
