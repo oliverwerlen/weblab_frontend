@@ -30,6 +30,7 @@ import { LoginComponent } from './login-component/login.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { authInterceptorProviders } from './auth.interceptor';
 import { MatFileUploadModule } from 'angular-material-fileupload';
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
 
 
 
@@ -67,7 +68,10 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     MatSnackBarModule,
     MatFileUploadModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [
+    authInterceptorProviders, 
+    {provide : LocationStrategy , useClass: HashLocationStrategy}, 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
