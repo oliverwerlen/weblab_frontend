@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     CommonModule, 
     BrowserModule, 
     FormsModule,
-    RouterModule.forRoot(appRoutes, {useHash: true})
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
   ], 
   exports: [ RouterModule ]
 })
