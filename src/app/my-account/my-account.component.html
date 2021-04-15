@@ -1,6 +1,75 @@
 <div *ngIf="isLoggedIn">
-    <h1>Welcome to your Account. Currently, no information are available here. </h1>
-</div>
-<div *ngIf="!isLoggedIn?goToLogin():false;">
-    
-</div>
+  <div class="blog-container-background">
+    <div class="blog-container">
+      <h1>Meine Accountdetails</h1>
+      <p>Benutzername: {{currentUser.username}}</p> <br>
+      <p>Email: {{currentUser.email}}</p> <br>
+      <p>Rolle: {{currentUser.role}}</p> <br>
+
+      <h2>
+        Meine Blogs
+        <button mat-icon-button color="primary" (click)="showAddForm()" class="buttonAdd"><span
+          class="material-icons">add</span></button>
+      </h2>
+
+      <div *ngIf="addForm">
+        <h2>Erstelle einen neuen Blog</h2>
+        <form [formGroup]="formGroup" class="form">
+          <mat-form-field class="form-element">
+            <input matInput placeholder="title" formControlName="title">
+          </mat-form-field>
+
+          <mat-form-field class="form-element">
+            <input matInput placeholder="description" formControlName="description">
+          </mat-form-field>
+
+          <div class="form-element">
+            <button mat-raised-button color="primary" class="button" (click)="addBlog(formGroup.value)">Block hinzufügen
+            </button>
+          </div>
+        </form>
+      </div>
+      <mat-card *ngFor="let blog of blogs" class="blog-cards">
+
+        <mat-card-header>
+          <mat-card-title>{{blog.title}}</mat-card-title>
+          <mat-card-subtitle>Von {{blog.creator.username}}
+            , {{blog.createDate | date: "MMM d, y, h:mm:ss a"}} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          {{blog.description}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/blog/{{blog._id}}"> Blogeinträge anzeigen</button>
+          <div class="controlsBlog" *ngIf="isCreatedByCurrentUser(blog.creator._id)">
+            <button mat-icon-button color="primary" (click)="showUpdateForm(blog)"><span
+              class="material-icons">mode_edit</span></button>
+            <button mat-icon-button color="primary" (click)="deleteBlog(blog._id)"><span
+              class="material-icons">delete</span></button>
+          </div>
+
+          <div *ngIf="updateForm == blog._id">
+            <form [formGroup]="formGroup" class="form">
+              <mat-form-field class="form-element">
+                <input matInput placeholder={{blog.title}} formControlName="title">
+              </mat-form-field>
+
+              <mat-form-field class="form-element">
+                <input matInput placeholder={{blog.description}} formControlName="description">
+              </mat-form-field>
+
+              <div class="form-element">
+                <button mat-raised-button color="primary" class="button" (click)="updateBlog(formGroup.value, blog._id)">
+                  Update Blog
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </mat-card-actions>
+
+      </mat-card>
+
+    </div>
+
+  </div>

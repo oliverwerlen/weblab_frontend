@@ -6,9 +6,6 @@ import { User } from './user/user';
 
 const authUrl = 'http://weblab-f21-ffischer.el.eee.intern:3000/api/auth';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -29,5 +26,9 @@ httpOptions = {
     let user = JSON.stringify({ "username": formData["name"], "password": formData["password"], "email": formData["email"],  "role": 'user' });
     console.log(user);
     return this.http.post(authUrl + '/register', user, this.httpOptions);
+  }
+
+  getUser(): Observable<any> {
+    return this.http.get(authUrl + '/user', this.httpOptions);
   }
 }

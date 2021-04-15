@@ -23,7 +23,7 @@
 
         <mat-file-upload-queue #fileUploadQueue
             [fileAlias]="'file'"
-            [httpUrl]="'http://weblab-f21-ffischer.el.eee.intern:3000/api/image'">
+            [httpUrl]="'http://weblab-f21-ffischer.el.eee.intern/:3000/api/image'">
             <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index " (onUpload)="uploadEvent($event)"></mat-file-upload>
         </mat-file-upload-queue>
 
@@ -43,7 +43,7 @@
     <mat-card-content>
       {{blogentry.description}}
     </mat-card-content>
-    <img *ngIf="blogentry.image" mat-card-image src="http://weblab-f21-ffischer.el.eee.intern:3000/api/image/{{blogentry.image}}" alt="Photo of a Shiba Inu">
+    <img *ngIf="blogentry.image" mat-card-image src="http://weblab-f21-ffischer.el.eee.intern/:3000/api/image/{{blogentry.image}}" alt="Photo of a Shiba Inu">
 
     <div class = "controlsBlogentry" *ngIf="isCreatedByCurrentUser(blogentry.creator._id)">
         <button mat-icon-button color="primary" (click)="showUpdateForm(blogentry)"> <span class="material-icons">mode_edit</span></button>
